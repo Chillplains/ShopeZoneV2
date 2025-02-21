@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopZone - Shop</title>
+    <title>ShopZone - Cart</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,84 +20,68 @@
             justify-content: space-between;
             align-items: center;
         }
-        .cart-icon {
-            position: relative;
-            margin-right: 20px;
-            cursor: pointer;
+        .cart-container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
         }
-        .cart-icon span {
-            background: red;
-            color: white;
-            border-radius: 50%;
-            padding: 5px 10px;
-            position: absolute;
-            top: -5px;
-            right: -10px;
-            font-size: 14px;
-        }
-        .products {
+        .cart-item {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 20px;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
         }
-        .product {
-            border: 1px solid #ddd;
-            margin: 10px;
-            padding: 15px;
-            width: 250px;
-        }
-        .product img {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-        }
-        .button {
+        .checkout-button {
             background-color: #28a745;
             color: white;
-            padding: 10px 15px;
+            padding: 10px 20px;
             text-decoration: none;
             display: inline-block;
-            margin-top: 10px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
         }
     </style>
     <script>
-        let cartCount = 0;
-        function updateCartCount() {
-            document.getElementById('cart-count').innerText = cartCount;
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        function displayCart() {
+            const cartContainer = document.getElementById("cart-items");
+            cartContainer.innerHTML = "";
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                cartContainer.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.name} - $${item.price.toFixed(2)}</span>
+                        <button onclick="removeFromCart(${index})">Remove</button>
+                    </div>
+                `;
+            });
+            document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`;
         }
-        function addToCart() {
-            cartCount++;
-            updateCartCount();
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayCart();
         }
+        function checkout() {
+            alert("Redirecting to payment...");
+            window.open("https://www.paypal.com/checkout", "_blank");
+        }
+        window.onload = displayCart;
     </script>
 </head>
 <body>
     <div class="header">
-        <div>ShopZone - Shop</div>
-        <div class="cart-icon">
-            <a href="cart.html">🛒 <span id="cart-count">0</span></a>
-        </div>
+        <div>ShopZone - Cart</div>
+        <a href="shop.html" style="color: white; text-decoration: none; font-size: 18px;">← Back to Shop</a>
     </div>
-    <div class="products">
-        <div class="product">
-            <img src="https://example.com/tshirt1.jpg" alt="Graphic T-Shirt">
-            <h3>Graphic T-Shirt</h3>
-            <p>$19.99</p>
-            <button class="button" onclick="addToCart()">Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://example.com/tshirt2.jpg" alt="Minimalist Tee">
-            <h3>Minimalist Tee</h3>
-            <p>$22.99</p>
-            <button class="button" onclick="addToCart()">Add to Cart</button>
-        </div>
-        <div class="product">
-            <img src="https://example.com/tshirt3.jpg" alt="Vintage Tee">
-            <h3>Vintage Tee</h3>
-            <p>$24.99</p>
-            <button class="button" onclick="addToCart()">Add to Cart</button>
-        </div>
+    <div class="cart-container">
+        <h1>Your Cart</h1>
+        <div id="cart-items"></div>
+        <h2 id="total">Total: $0.00</h2>
+        <button class="checkout-button" onclick="checkout()">Proceed to Checkout</button>
     </div>
 </body>
 </html>
