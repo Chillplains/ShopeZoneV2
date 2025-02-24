@@ -3,85 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopZone - Cart</title>
+    <title>ShopZone - Premium Shopping</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center;
+            background-color: #f4f4f4;
         }
         .header {
-            background-color: #333;
+            background: linear-gradient(90deg, #ff8c00, #ff4500);
             color: white;
-            padding: 15px;
-            font-size: 24px;
+            padding: 20px;
+            font-size: 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .cart-container {
-            width: 80%;
-            margin: auto;
-            padding: 20px;
-        }
-        .cart-item {
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 22px;
             display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #ddd;
-            padding: 10px 0;
+            align-items: center;
+            gap: 10px;
         }
-        .checkout-button {
-            background-color: #28a745;
+        .cart-icon span {
+            background: red;
             color: white;
-            padding: 10px 20px;
+            border-radius: 50%;
+            padding: 4px 8px;
+            position: absolute;
+            top: -5px;
+            right: -15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 30px;
+        }
+        .product {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product:hover {
+            transform: scale(1.07);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .button {
+            background-color: #ff4500;
+            color: white;
+            padding: 12px 18px;
             text-decoration: none;
             display: inline-block;
-            font-size: 20px;
+            margin-top: 12px;
             border: none;
             cursor: pointer;
-            margin-top: 20px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #cc3700;
         }
     </style>
     <script>
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        function displayCart() {
-            const cartContainer = document.getElementById("cart-items");
-            cartContainer.innerHTML = "";
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += item.price;
-                cartContainer.innerHTML += `
-                    <div class="cart-item">
-                        <span>${item.name} - $${item.price.toFixed(2)}</span>
-                        <button onclick="removeFromCart(${index})">Remove</button>
-                    </div>
-                `;
-            });
-            document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`;
-        }
-        function removeFromCart(index) {
-            cart.splice(index, 1);
+        function addToCart(name, price) {
+            cart.push({ name, price });
             localStorage.setItem("cart", JSON.stringify(cart));
-            displayCart();
+            updateCartCount();
         }
-        function checkout() {
-            alert("Redirecting to payment...");
-            window.open("https://www.paypal.com/checkout", "_blank");
+        function updateCartCount() {
+            document.getElementById("cart-count").innerText = cart.length;
         }
-        window.onload = displayCart;
+        window.onload = updateCartCount;
     </script>
 </head>
 <body>
     <div class="header">
-        <div>ShopZone - Cart</div>
-        <a href="shop.html" style="color: white; text-decoration: none; font-size: 18px;">← Back to Shop</a>
+        <div>🛍️ ShopZone - Premium Shopping</div>
+        <div class="cart-icon">
+            <a href="cart.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
+                Cart 🛒 <span id="cart-count">0</span>
+            </a>
+        </div>
     </div>
-    <div class="cart-container">
-        <h1>Your Cart</h1>
-        <div id="cart-items"></div>
-        <h2 id="total">Total: $0.00</h2>
-        <button class="checkout-button" onclick="checkout()">Proceed to Checkout</button>
+    <div class="products">
+        <div class="product">
+            <img src="https://example.com/tshirt1.jpg" alt="Graphic T-Shirt">
+            <h3>🔥 Graphic T-Shirt</h3>
+            <p><strong>$19.99</strong></p>
+            <button class="button" onclick="addToCart('Graphic T-Shirt', 19.99)">🛒 Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://example.com/tshirt2.jpg" alt="Minimalist Tee">
+            <h3>🌟 Minimalist Tee</h3>
+            <p><strong>$22.99</strong></p>
+            <button class="button" onclick="addToCart('Minimalist Tee', 22.99)">🛒 Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://example.com/tshirt3.jpg" alt="Vintage Tee">
+            <h3>🎩 Vintage Tee</h3>
+            <p><strong>$24.99</strong></p>
+            <button class="button" onclick="addToCart('Vintage Tee', 24.99)">🛒 Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://example.com/sticker1.jpg" alt="Sticker Pack">
+            <h3>🚀 Sticker Pack</h3>
+            <p><strong>$5.99</strong></p>
+            <button class="button" onclick="addToCart('Sticker Pack', 5.99)">🛒 Add to Cart</button>
+        </div>
+        <div class="product">
+            <img src="https://example.com/phonecase1.jpg" alt="Phone Case">
+            <h3>📱 Premium Phone Case</h3>
+            <p><strong>$14.99</strong></p>
+            <button class="button" onclick="addToCart('Phone Case', 14.99)">🛒 Add to Cart</button>
+        </div>
     </div>
 </body>
 </html>
