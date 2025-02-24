@@ -55,6 +55,7 @@
     </style>
     <script>
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        
         function displayCart() {
             const cartContainer = document.getElementById("cart-items");
             cartContainer.innerHTML = "";
@@ -70,18 +71,31 @@
             });
             document.getElementById("total").innerText = `Total: $${total.toFixed(2)}`;
         }
+        
         function removeFromCart(index) {
             cart.splice(index, 1);
             localStorage.setItem("cart", JSON.stringify(cart));
             displayCart();
         }
+        
         function checkout() {
             window.location.href = "checkout.html";
         }
+        
         function goToCart() {
             window.location.href = "cart.html";
         }
-        window.onload = displayCart;
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            displayCart();
+            const cartIcon = document.querySelector(".cart-icon a");
+            if (cartIcon) {
+                cartIcon.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    goToCart();
+                });
+            }
+        });
     </script>
 </head>
 <body>
@@ -97,4 +111,3 @@
     </div>
 </body>
 </html>
-
