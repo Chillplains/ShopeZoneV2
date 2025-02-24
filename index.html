@@ -16,6 +16,9 @@
             color: white;
             padding: 15px;
             font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .nav {
             background-color: #444;
@@ -42,14 +45,6 @@
             margin-top: 20px;
         }
     </style>
-    <script>
-        function goToShop() {
-            window.location.href = 'shop.html';
-        }
-        function goToCart() {
-            window.location.href = 'cart.html';
-        }
-    </script>
 </head>
 <body>
     <div class="header">Welcome to ShopZone</div>
@@ -61,8 +56,8 @@
     <div class="container">
         <h1>Welcome to ShopZone</h1>
         <p>Your one-stop shop for exclusive products.</p>
-        <button class="button" onclick="goToShop()">Start Shopping</button>
-        <button class="button" style="background-color: #007bff;" onclick="goToCart()">Go to Cart</button>
+        <a href="shop.html" class="button">Start Shopping</a>
+        <a href="cart.html" class="button" style="background-color: #007bff;">Go to Cart</a>
     </div>
 </body>
 </html>
