@@ -6,16 +6,18 @@
     <title>ShopZone - Cart</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to right, #ff8c00, #ff4500);
+            color: white;
             text-align: center;
         }
         .header {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            font-size: 24px;
+            padding: 30px;
+            font-size: 40px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -23,24 +25,32 @@
         .cart-container {
             width: 80%;
             margin: auto;
-            padding: 20px;
+            padding: 40px;
+            background: white;
+            color: black;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
         .cart-item {
             display: flex;
             justify-content: space-between;
             border-bottom: 1px solid #ddd;
-            padding: 10px 0;
+            padding: 15px 0;
         }
         .checkout-button {
-            background-color: #28a745;
+            background-color: #232f3e;
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-decoration: none;
             display: inline-block;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
+            font-size: 22px;
+            border-radius: 8px;
+            transition: background 0.3s;
             margin-top: 20px;
+            font-weight: bold;
+        }
+        .checkout-button:hover {
+            background-color: #1a252f;
         }
     </style>
     <script>
@@ -66,19 +76,18 @@
             displayCart();
         }
         function checkout() {
-            alert("Redirecting to payment...");
-            window.open("https://www.paypal.com/checkout", "_blank");
+            window.location.href = "checkout.html";
         }
         window.onload = displayCart;
     </script>
 </head>
 <body>
     <div class="header">
-        <div>ShopZone - Cart</div>
-        <a href="shop.html" style="color: white; text-decoration: none; font-size: 18px;">← Back to Shop</a>
+        <div>🚀 ShopZone - Your Cart 🛍️</div>
+        <a href="shop.html" style="color: white; text-decoration: none; font-size: 22px;">← Back to Shop</a>
     </div>
     <div class="cart-container">
-        <h1>Your Cart</h1>
+        <h1>Your Shopping Cart</h1>
         <div id="cart-items"></div>
         <h2 id="total">Total: $0.00</h2>
         <button class="checkout-button" onclick="checkout()">Proceed to Checkout</button>
