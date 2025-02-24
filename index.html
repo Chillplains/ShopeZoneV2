@@ -3,61 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopZone - Home</title>
+    <title>ShopZone - Welcome</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to right, #ff8c00, #ff4500);
+            color: white;
             text-align: center;
         }
         .header {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            font-size: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav {
-            background-color: #444;
-            padding: 10px;
-        }
-        .nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 18px;
+            padding: 30px;
+            font-size: 40px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .container {
-            padding: 50px;
+            padding: 60px;
+        }
+        .tagline {
+            font-size: 26px;
+            margin-bottom: 20px;
         }
         .button {
-            background-color: #28a745;
+            background-color: #232f3e;
             color: white;
-            padding: 15px 20px;
+            padding: 15px 30px;
             text-decoration: none;
+            font-size: 22px;
+            border-radius: 8px;
+            transition: background 0.3s;
+            margin: 15px;
             display: inline-block;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
-            margin-top: 20px;
+            font-weight: bold;
+        }
+        .button:hover {
+            background-color: #1a252f;
+        }
+        .showcase {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+        .showcase img {
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="header">Welcome to ShopZone</div>
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="shop.html">Shop</a>
-        <a href="cart.html">Cart</a>
-    </div>
+    <div class="header">🚀 Welcome to ShopZone - The Future of Shopping! 🛍️</div>
     <div class="container">
-        <h1>Welcome to ShopZone</h1>
-        <p>Your one-stop shop for exclusive products.</p>
-        <a href="shop.html" class="button">Start Shopping</a>
-        <a href="cart.html" class="button" style="background-color: #007bff;">Go to Cart</a>
+        <div class="tagline">Find the best deals, the hottest trends, and the latest must-haves all in one place.</div>
+        <a href="shop.html" class="button">🛒 Start Shopping</a>
+        <a href="cart.html" class="button">🛍️ View Cart</a>
+        <div class="showcase">
+            <img src="https://example.com/showcase.jpg" alt="Amazing Deals">
+        </div>
     </div>
 </body>
 </html>
