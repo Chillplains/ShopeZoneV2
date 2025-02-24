@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopZone - Secure Checkout</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #ff8c00, #ff4500);
+            color: white;
+            text-align: center;
+        }
+        .header {
+            padding: 30px;
+            font-size: 40px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .checkout-container {
+            width: 80%;
+            margin: auto;
+            padding: 40px;
+            background: white;
+            color: black;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+        .checkout-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .checkout-button {
+            background-color: #232f3e;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            display: block;
+            font-size: 22px;
+            border-radius: 8px;
+            transition: background 0.3s;
+            margin-top: 20px;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+        .checkout-button:hover {
+            background-color: #1a252f;
+        }
+    </style>
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        function displayTotal() {
+            let total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+            document.getElementById("total").innerText = `Total: $${total}`;
+        }
+        function processPayment(event) {
+            event.preventDefault();
+            alert("Payment successful! Your order has been placed.");
+            localStorage.removeItem("cart");
+            window.location.href = "index.html";
+        }
+        window.onload = displayTotal;
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div>🚀 ShopZone - Secure Checkout 🛍️</div>
+        <a href="cart.html" style="color: white; text-decoration: none; font-size: 22px;">← Back to Cart</a>
+    </div>
+    <div class="checkout-container">
+        <h1>Checkout</h1>
+        <h2 id="total">Total: $0.00</h2>
+        <form class="checkout-form" onsubmit="processPayment(event)">
+            <label for="card-name">Cardholder Name</label>
+            <input type="text" id="card-name" required>
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" required pattern="\d{16}" placeholder="1234 5678 9101 1121">
+            <label for="expiry-date">Expiry Date</label>
+            <input type="text" id="expiry-date" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])/[0-9]{2}">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" required pattern="\d{3}" placeholder="123">
+            <label for="billing-address">Billing Address</label>
+            <input type="text" id="billing-address" required>
+            <button class="checkout-button" type="submit">Complete Purchase</button>
+        </form>
+    </div>
+</body>
+</html>
