@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+        }
+        .carousel img {
+            width: 100px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .options {
+            margin: 20px 0;
+        }
+        .button {
+            background-color: #ff4500;
+            color: white;
+            padding: 12px 18px;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.3s;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #cc3700;
+        }
+        .reviews {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+    <script>
+        function loadProductDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productName = urlParams.get("name");
+            document.getElementById("product-name").innerText = productName;
+        }
+        window.onload = loadProductDetails;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="product-name">Product Name</h1>
+        <img id="main-image" src="https://example.com/default.jpg" class="product-image">
+        <div class="carousel">
+            <img src="https://example.com/default1.jpg" onclick="document.getElementById('main-image').src=this.src">
+            <img src="https://example.com/default2.jpg" onclick="document.getElementById('main-image').src=this.src">
+            <img src="https://example.com/default3.jpg" onclick="document.getElementById('main-image').src=this.src">
+        </div>
+        <div class="options">
+            <h3>Choose Size:</h3>
+            <select>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+            </select>
+            <h3>Choose Color:</h3>
+            <select>
+                <option>Red</option>
+                <option>Blue</option>
+                <option>Black</option>
+            </select>
+        </div>
+        <button class="button" onclick="alert('Added to cart!')">🛒 Add to Cart</button>
+        <div class="reviews">
+            <h2>Customer Reviews</h2>
+            <p>⭐⭐⭐⭐⭐ - "Great product!"</p>
+            <p>⭐⭐⭐⭐ - "Good quality, fast shipping!"</p>
+        </div>
+    </div>
+</body>
+</html>
