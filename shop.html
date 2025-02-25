@@ -21,6 +21,13 @@
             align-items: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        .search-bar {
+            width: 300px;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            font-size: 16px;
+        }
         .cart-icon {
             position: relative;
             cursor: pointer;
@@ -62,6 +69,7 @@
             width: 100%;
             height: auto;
             border-radius: 10px;
+            cursor: pointer;
         }
         .button {
             background-color: #ff4500;
@@ -90,12 +98,24 @@
         function updateCartCount() {
             document.getElementById("cart-count").innerText = cart.length;
         }
+        function searchProducts() {
+            let searchValue = document.getElementById("search-bar").value.toLowerCase();
+            let products = document.querySelectorAll(".product");
+            products.forEach(product => {
+                let productName = product.querySelector("h3").innerText.toLowerCase();
+                product.style.display = productName.includes(searchValue) ? "block" : "none";
+            });
+        }
+        function viewProduct(productName) {
+            window.location.href = `product.html?name=${encodeURIComponent(productName)}`;
+        }
         window.onload = updateCartCount;
     </script>
 </head>
 <body>
     <div class="header">
         <div>🛍️ ShopZone - Premium Shopping</div>
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search products..." onkeyup="searchProducts()">
         <div class="cart-icon">
             <a href="cart.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
                 Cart 🛒 <span id="cart-count">0</span>
@@ -103,31 +123,31 @@
         </div>
     </div>
     <div class="products">
-        <div class="product">
+        <div class="product" onclick="viewProduct('Graphic T-Shirt')">
             <img src="https://example.com/tshirt1.jpg" alt="Graphic T-Shirt">
             <h3>🔥 Graphic T-Shirt</h3>
             <p><strong>$19.99</strong></p>
             <button class="button" onclick="addToCart('Graphic T-Shirt', 19.99)">🛒 Add to Cart</button>
         </div>
-        <div class="product">
+        <div class="product" onclick="viewProduct('Minimalist Tee')">
             <img src="https://example.com/tshirt2.jpg" alt="Minimalist Tee">
             <h3>🌟 Minimalist Tee</h3>
             <p><strong>$22.99</strong></p>
             <button class="button" onclick="addToCart('Minimalist Tee', 22.99)">🛒 Add to Cart</button>
         </div>
-        <div class="product">
+        <div class="product" onclick="viewProduct('Vintage Tee')">
             <img src="https://example.com/tshirt3.jpg" alt="Vintage Tee">
             <h3>🎩 Vintage Tee</h3>
             <p><strong>$24.99</strong></p>
             <button class="button" onclick="addToCart('Vintage Tee', 24.99)">🛒 Add to Cart</button>
         </div>
-        <div class="product">
+        <div class="product" onclick="viewProduct('Sticker Pack')">
             <img src="https://example.com/sticker1.jpg" alt="Sticker Pack">
             <h3>🚀 Sticker Pack</h3>
             <p><strong>$5.99</strong></p>
             <button class="button" onclick="addToCart('Sticker Pack', 5.99)">🛒 Add to Cart</button>
         </div>
-        <div class="product">
+        <div class="product" onclick="viewProduct('Phone Case')">
             <img src="https://example.com/phonecase1.jpg" alt="Phone Case">
             <h3>📱 Premium Phone Case</h3>
             <p><strong>$14.99</strong></p>
